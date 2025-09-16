@@ -1,11 +1,11 @@
-# 👋 Hi, I'm Fabien
+# Hi, I'm Fabien
 
 Welcome to my GitHub profile.  
 I'm a senior developer with a focus on data modeling, storytelling tools, and open-source collaboration.
 
 ---
 
-### 🚀 About Me
+### About Me
 
 - **Founder of [Chrono Journey Engine](https://github.com/fabien-tanguy/chrono-journey-engine)**  
   An open-source framework for building interactive timelines that blend history, fiction, and emotion.  
@@ -23,7 +23,7 @@ I'm a senior developer with a focus on data modeling, storytelling tools, and op
 
 ---
 
-### 🛠️ What you'll find here
+### What you'll find here
 
 - Structured data seeds for timelines (history, pop culture, sports, and more)
 - Open-source code, automation scripts, and best practices for data management
@@ -31,7 +31,7 @@ I'm a senior developer with a focus on data modeling, storytelling tools, and op
 
 ---
 
-### 🤝 Let's connect
+### Let's connect
 
 - **Email:** tanguyfab@gmail.com - contact@chrono-journey.com  
 - **Website:** [chrono-journey.com](https://chrono-journey.com)  

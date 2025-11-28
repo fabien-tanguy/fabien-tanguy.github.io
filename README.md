@@ -12,7 +12,7 @@ and **performance-driven architectures**.
 
 ---
 
-## 🔧 Core Expertise
+## Core Expertise
 
 - **Data & SQL**
   - Oracle Database SQL, relational modeling, query optimisation
@@ -35,7 +35,7 @@ and **performance-driven architectures**.
 
 ---
 
-## 🤝 How I work
+## How I work
 
 - Senior mindset: clarity, ownership, and pragmatism  
 - Comfortable bridging **product, frontend, backend and data**  

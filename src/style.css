@@ -157,9 +157,61 @@ main {
   background: var(--glass-bg);
   backdrop-filter: blur(12px);
   border: 1px solid var(--glass-border);
-  padding: 2.5rem;
+  padding: 3rem;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.profile-container {
+  flex-shrink: 0;
+  position: relative;
+}
+
+.profile-img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 40px rgba(56, 189, 248, 0.3);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.profile-container::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  background: var(--accent-gradient);
+  z-index: -1;
+  opacity: 0.5;
+  filter: blur(15px);
+  transition: opacity 0.5s ease;
+}
+
+.intro-card:hover .profile-img {
+  transform: scale(1.05);
+  box-shadow: 0 0 60px rgba(56, 189, 248, 0.5);
+}
+
+.intro-card:hover .profile-container::before {
+  opacity: 0.8;
+}
+
+.intro-text {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .intro-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+    gap: 2rem;
+  }
 }
 
 .intro-text p {

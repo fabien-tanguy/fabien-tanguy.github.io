@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Fabien Tanguy - System Architect & Engineering Leader. Explore professional background, system expertise, and engineering insights."
+    />
+    <meta
+      property="og:title"
+      content="Fabien Tanguy - System Architect & Engineering Leader"
+    />
+    <title>Fabien Tanguy - System Architect & Engineering Leader</title>
+    <!-- Preload fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <div class="container">
+      <header>
+        <h1>Fabien Tanguy</h1>
+        <p class="subtitle">System Architect & Engineering Leader</p>
+
+        <nav class="nav-tabs">
+          <button class="tab-btn active" data-tab="home">Overview</button>
+          <button class="tab-btn" data-tab="documents">Documents</button>
+          <button class="tab-btn" data-tab="blog">Insights</button>
+        </nav>
+      </header>
+
+      <main id="app">
+        <!-- Home Section -->
+        <section id="home" class="content-section active">
+          <div class="intro-card">
+            <div class="intro-text">
+              <p>
+                Hello, I'm <strong>Fabien Tanguy</strong>. I specialize in
+                building robust, scalable systems and leading technical teams.
+                My work focuses on bridging the gap between complex engineering
+                challenges and elegant user experiences.
+              </p>
+              <p>
+                With deep expertise in system architecture, I help organizations
+                transform technical vision into reality. Whether it's optimizing
+                performance, designing resilient distributed systems, or
+                mentoring engineering talent, I bring a strategic and hands-on
+                approach to every project.
+              </p>
+              <p>
+                Feel free to explore my professional documents or read my latest
+                thoughts on engineering standards.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Documents Section -->
+        <section id="documents" class="content-section">
+          <div class="docs-grid">
+            <a href="/EN-Fabien-Tanguy-CV.pdf" target="_blank" class="doc-card">
+              <div class="doc-icon">📄</div>
+              <h3 class="doc-title">Curriculum Vitæ (EN)</h3>
+              <p class="doc-desc">Comprehensive professional resume</p>
+            </a>
+            <a href="/FR-Fabien-Tanguy-CV.pdf" target="_blank" class="doc-card">
+              <div class="doc-icon">📄</div>
+              <h3 class="doc-title">Curriculum Vitæ (FR)</h3>
+              <p class="doc-desc">CV complet en français</p>
+            </a>
+            <a
+              href="/EN-SYSTEM-EXPERTISE-OVERVIEW.pdf"
+              target="_blank"
+              class="doc-card"
+            >
+              <div class="doc-icon">📊</div>
+              <h3 class="doc-title">Technical Portfolio (EN)</h3>
+              <p class="doc-desc">Detailed competencies & technical overview</p>
+            </a>
+            <a
+              href="#"
+              class="doc-card"
+              style="opacity: 0.7; cursor: not-allowed"
+            >
+              <div class="doc-icon">📊</div>
+              <h3 class="doc-title">Dossier de Compétences (FR)</h3>
+              <p class="doc-desc">Vue d'ensemble technique (Coming Soon)</p>
+            </a>
+          </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="content-section">
+          <div
+            style="
+              text-align: center;
+              margin-bottom: 2rem;
+              color: var(--text-secondary);
+            "
+          >
+            <p>
+              Sharing perspectives on system design, reliability, and the
+              engineering journey.
+            </p>
+          </div>
+          <div
+            id="loading-blog"
+            style="text-align: center; color: var(--text-secondary)"
+          >
+            Loading articles...
+          </div>
+          <div id="blog-grid" class="blog-grid">
+            <!-- Articles will be injected here -->
+          </div>
+          <div
+            id="blog-fallback"
+            style="display: none; text-align: center; margin-top: 2rem"
+          >
+            <a
+              href="https://medium.com/@tanguyfab/api-error-handling-demystified-dont-just-fetch-handle-in-js-ts-7938ee22afb9"
+              target="_blank"
+              style="color: var(--primary-color)"
+              >Check out my Medium profile</a
+            >
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

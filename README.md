@@ -8,7 +8,7 @@ and code that survives more than one hype cycle.
 
 My background started in frontend engineering, but over the years my work  
 naturally gravitated toward **data modeling**, **business logic**,  
-and **performance-driven architectures**.  
+and **performance-driven architectures**.
 
 ---
 
@@ -37,10 +37,10 @@ and **performance-driven architectures**.
 
 ## How I work
 
-- Senior mindset: clarity, ownership, and pragmatism  
-- Comfortable bridging **product, frontend, backend and data**  
-- Used to working with non-technical stakeholders (product, métiers, ops)  
-- Calm under pressure, with a taste for long-term durability over short-lived trends  
+- Senior mindset: clarity, ownership, and pragmatism
+- Comfortable bridging **product, frontend, backend and data**
+- Used to working with non-technical stakeholders (product, métiers, ops)
+- Calm under pressure, with a taste for long-term durability over short-lived trends
 
 ---
 
@@ -56,7 +56,8 @@ and **performance-driven architectures**.
   [Verify badge](https://catalog-education.oracle.com/pls/certview/sharebadge?id=D962881F80C202DB4DEF6D864CF16E7D5FDF276990581917C09080DE6A97A847)
 
 - Cybersecurity Fundamentals — IBM Skills (2025)
-  [verify badge](https://www.credly.com/badges/c8e76964-e2dd-4697-a732-bd098f8273b1/public_url) 
+  [verify badge](https://www.credly.com/badges/c8e76964-e2dd-4697-a732-bd098f8273b1/public_url)
+
 ---
 
 ## 🔍 What you’ll find here
@@ -74,7 +75,7 @@ More real-world, less “toy code”.
 
 ## 📬 Contact
 
-- **Email:** tanguyfab@gmail.com  
+- **Email:** tanguyfab@gmail.com
 
 I’m open to freelance missions, especially around SQL, Oracle, data-centric apps,  
 or bridging existing frontends with a more robust data layer.

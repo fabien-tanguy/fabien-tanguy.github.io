@@ -71,6 +71,12 @@ body {
   flex: 1;
 }
 
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem;
+  }
+}
+
 /* Header & Nav */
 header {
   margin-bottom: 4rem;
@@ -125,6 +131,20 @@ h1 {
 
 .tab-btn:hover:not(.active) {
   color: var(--text-primary);
+}
+
+@media (max-width: 600px) {
+  .nav-tabs {
+    display: flex;
+    width: 100%;
+    padding: 0.25rem;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 0.5rem 0.25rem;
+    font-size: 0.9rem;
+  }
 }
 
 /* Main Content Area */

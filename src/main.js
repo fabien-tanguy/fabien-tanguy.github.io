@@ -1,24 +1,38 @@
 import './style.css';
 
+// Analytics helper
+function trackEvent(path, title) {
+  if (typeof window.goatcounter?.count === 'function') {
+    window.goatcounter.count({ path, title, event: true });
+  }
+}
+
 // Tab Navigation
 const tabBtns = document.querySelectorAll('.tab-btn');
 const sections = document.querySelectorAll('.content-section');
 
 tabBtns.forEach((btn) => {
   btn.addEventListener('click', () => {
-    // Remove active class from all buttons and sections
     tabBtns.forEach((b) => b.classList.remove('active'));
     sections.forEach((s) => s.classList.remove('active'));
 
-    // Add active class to clicked button
     btn.classList.add('active');
 
-    // Show corresponding section
     const tabName = btn.dataset.tab;
     const section = document.getElementById(tabName);
     if (section) {
       section.classList.add('active');
     }
+
+    trackEvent(`tab-${tabName}`, `Tab: ${btn.textContent.trim()}`);
+  });
+});
+
+// CV PDF click tracking
+document.querySelectorAll('a[href$=".pdf"]').forEach((link) => {
+  link.addEventListener('click', () => {
+    const lang = link.href.includes('EN') ? 'en' : 'fr';
+    trackEvent(`cv-download-${lang}`, `CV Download (${lang.toUpperCase()})`);
   });
 });
 
@@ -83,3 +97,27 @@ async function fetchMediumArticles() {
 
 // Initialize
 fetchMediumArticles();
+
+// Email anti-spam: ROT13-encoded address decoded at runtime
+function rot13(str) {
+  return str.replace(/[a-zA-Z]/g, (c) => {
+    const base = c <= 'Z' ? 65 : 97;
+    return String.fromCharCode(((c.charCodeAt(0) - base + 13) % 26) + base);
+  });
+}
+
+const emailLink = document.getElementById('email-link');
+if (emailLink) {
+  const encoded = 'gnatnlsno@tznvy.pbz';
+  emailLink.addEventListener('click', () => {
+    window.location.href = 'mailto:' + rot13(encoded);
+  });
+  emailLink.style.cursor = 'pointer';
+  emailLink.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect width="20" height="16" x="2" y="4" rx="2"/>
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+    </svg>
+    <span>Contact</span>
+  `;
+}

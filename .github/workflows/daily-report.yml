@@ -1,0 +1,89 @@
+name: Daily Analytics Report
+
+on:
+  schedule:
+    - cron: '0 7 * * *' # 8h Paris (UTC+1)
+  workflow_dispatch: # permet de lancer manuellement
+
+jobs:
+  send-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send daily report
+        env:
+          GOATCOUNTER_TOKEN: ${{ secrets.GOATCOUNTER_TOKEN }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+        run: |
+          node << 'EOF'
+          const yesterday = new Date();
+          yesterday.setDate(yesterday.getDate() - 1);
+          const date = yesterday.toISOString().split('T')[0];
+
+          async function fetchStats() {
+            const base = 'https://tanguyfab.goatcounter.com/api/v0';
+            const headers = {
+              'Authorization': `Bearer ${process.env.GOATCOUNTER_TOKEN}`,
+              'Content-Type': 'application/json',
+            };
+
+            const [hitsRes, pathsRes] = await Promise.all([
+              fetch(`${base}/stats/hits?start=${date}&end=${date}`, { headers }),
+              fetch(`${base}/stats/hits?start=${date}&end=${date}&filter=event`, { headers }),
+            ]);
+
+            const hits = await hitsRes.json();
+            const events = await pathsRes.json();
+
+            const totalVisits = hits.hits?.reduce((sum, h) => sum + h.count, 0) ?? 0;
+
+            const findEvent = (path) =>
+              events.hits?.find((h) => h.path === path)?.count ?? 0;
+
+            return {
+              date,
+              totalVisits,
+              tabOverview: findEvent('tab-home'),
+              tabCV: findEvent('tab-documents'),
+              tabInsights: findEvent('tab-blog'),
+              cvEn: findEvent('cv-download-en'),
+              cvFr: findEvent('cv-download-fr'),
+            };
+          }
+
+          async function sendEmail(stats) {
+            const html = `
+              <h2>Analytics du ${stats.date}</h2>
+              <table style="border-collapse:collapse;font-family:sans-serif;font-size:15px">
+                <tr><td style="padding:6px 12px;color:#64748b">Visites totales</td><td style="padding:6px 12px;font-weight:bold">${stats.totalVisits}</td></tr>
+                <tr><td style="padding:6px 12px;color:#64748b">Onglet Overview</td><td style="padding:6px 12px">${stats.tabOverview}</td></tr>
+                <tr><td style="padding:6px 12px;color:#64748b">Onglet CV</td><td style="padding:6px 12px">${stats.tabCV}</td></tr>
+                <tr><td style="padding:6px 12px;color:#64748b">Onglet Insights</td><td style="padding:6px 12px">${stats.tabInsights}</td></tr>
+                <tr><td style="padding:6px 12px;color:#64748b">CV téléchargé (EN)</td><td style="padding:6px 12px">${stats.cvEn}</td></tr>
+                <tr><td style="padding:6px 12px;color:#64748b">CV téléchargé (FR)</td><td style="padding:6px 12px">${stats.cvFr}</td></tr>
+              </table>
+              <p style="margin-top:16px;color:#94a3b8;font-size:12px">fabienguy.github.io</p>
+            `;
+
+            const res = await fetch('https://api.resend.com/emails', {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                from: 'analytics@fabienguy.github.io <onboarding@resend.dev>',
+                to: ['tanguyfab@gmail.com'],
+                subject: `Portfolio analytics — ${stats.date}`,
+                html,
+              }),
+            });
+
+            if (!res.ok) {
+              const err = await res.text();
+              throw new Error(`Resend error: ${err}`);
+            }
+            console.log('Email sent for', stats.date);
+          }
+
+          fetchStats().then(sendEmail).catch((e) => { console.error(e); process.exit(1); });
+          EOF

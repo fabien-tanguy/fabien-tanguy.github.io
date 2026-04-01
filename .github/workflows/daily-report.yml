@@ -26,18 +26,15 @@ jobs:
               'Content-Type': 'application/json',
             };
 
-            const [hitsRes, pathsRes] = await Promise.all([
-              fetch(`${base}/stats/hits?start=${date}&end=${date}`, { headers }),
-              fetch(`${base}/stats/hits?start=${date}&end=${date}&filter=event`, { headers }),
-            ]);
-
+            const hitsRes = await fetch(`${base}/stats/hits?start=${date}&end=${date}`, { headers });
             const hits = await hitsRes.json();
-            const events = await pathsRes.json();
 
-            const totalVisits = hits.hits?.reduce((sum, h) => sum + h.count, 0) ?? 0;
+            const allHits = hits.hits ?? [];
+            const pageViews = allHits.filter((h) => !h.event);
+            const totalVisits = pageViews.reduce((sum, h) => sum + h.count, 0);
 
             const findEvent = (path) =>
-              events.hits?.find((h) => h.path === path)?.count ?? 0;
+              allHits.find((h) => h.path === path)?.count ?? 0;
 
             return {
               date,

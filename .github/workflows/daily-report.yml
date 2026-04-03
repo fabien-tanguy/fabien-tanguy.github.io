@@ -26,7 +26,8 @@ jobs:
               'Content-Type': 'application/json',
             };
 
-            const hitsRes = await fetch(`${base}/stats/hits?start=${date}&end=${date}`, { headers });
+            const hitsRes = await fetch(`${base}/stats/hits?start=2026-01-01&end=${date}&daily=true`, { headers });
+            console.log('HTTP status:', hitsRes.status);
             const hits = await hitsRes.json();
             console.log('API response:', JSON.stringify(hits, null, 2));
 

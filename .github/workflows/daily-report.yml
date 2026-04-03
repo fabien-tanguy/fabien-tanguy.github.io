@@ -30,11 +30,14 @@ jobs:
             const hits = await hitsRes.json();
 
             const allHits = hits.hits ?? [];
+            const hitCount = (h) => (h.stats ?? []).reduce((s, d) => s + d.daily, 0);
             const pageViews = allHits.filter((h) => !h.event);
-            const totalVisits = pageViews.reduce((sum, h) => sum + h.count, 0);
+            const totalVisits = pageViews.reduce((sum, h) => sum + hitCount(h), 0);
 
-            const findEvent = (path) =>
-              allHits.find((h) => h.path === path)?.count ?? 0;
+            const findEvent = (path) => {
+              const h = allHits.find((h) => h.path === path);
+              return h ? hitCount(h) : 0;
+            };
 
             return {
               date,

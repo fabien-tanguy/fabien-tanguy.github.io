@@ -28,6 +28,7 @@ jobs:
 
             const hitsRes = await fetch(`${base}/stats/hits?start=${date}&end=${date}`, { headers });
             const hits = await hitsRes.json();
+            console.log('API response:', JSON.stringify(hits, null, 2));
 
             const allHits = hits.hits ?? [];
             const hitCount = (h) => (h.stats ?? []).reduce((s, d) => s + d.daily, 0);

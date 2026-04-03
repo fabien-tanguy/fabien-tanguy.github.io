@@ -15,6 +15,8 @@ jobs:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
         run: |
           node << 'EOF'
+          const today = new Date();
+          const todayDate = today.toISOString().split('T')[0];
           const yesterday = new Date();
           yesterday.setDate(yesterday.getDate() - 1);
           const date = yesterday.toISOString().split('T')[0];
@@ -26,8 +28,9 @@ jobs:
               'Content-Type': 'application/json',
             };
 
-            const hitsRes = await fetch(`${base}/stats/hits?start=${date}&end=${date}&daily=true`, { headers });
+            const hitsRes = await fetch(`${base}/stats/hits?start=${date}&end=${todayDate}&daily=true`, { headers });
             const hits = await hitsRes.json();
+            console.log('hits paths:', JSON.stringify((hits.hits ?? []).map(h => ({ path: h.path, count: h.count }))));
 
             const allHits = hits.hits ?? [];
             const pageViews = allHits.filter((h) => !h.event);

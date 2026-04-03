@@ -30,7 +30,6 @@ jobs:
 
             const hitsRes = await fetch(`${base}/stats/hits?start=${date}&end=${todayDate}&daily=true`, { headers });
             const hits = await hitsRes.json();
-            console.log('hits paths:', JSON.stringify((hits.hits ?? []).map(h => ({ path: h.path, count: h.count }))));
 
             const allHits = hits.hits ?? [];
             const pageViews = allHits.filter((h) => !h.event);
